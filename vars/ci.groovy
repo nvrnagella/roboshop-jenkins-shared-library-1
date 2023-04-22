@@ -12,6 +12,7 @@ def call(){
             stage('compile/built'){
                 steps{
                     echo 'compiling'
+                    echo 'from shared library'
                 }
             }
             stage('unit test'){
