@@ -1,5 +1,5 @@
 def new1(){
-    if ( component == nodejs ){
+    if ( "component" == "nginx" ){
         print "yes"
     }else{
         print "no"
