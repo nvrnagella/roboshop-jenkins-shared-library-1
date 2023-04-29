@@ -12,9 +12,7 @@ def call(){
             stage('compile/built'){
                 steps{
                     script{
-                        echo 'compiling'
-                        echo 'from shared library'
-                        test.new1()
+                        common.compile
                     }
 
                 }
