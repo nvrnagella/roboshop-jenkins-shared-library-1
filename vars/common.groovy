@@ -12,5 +12,5 @@ def unittest(){
     }
 }
 def email(email_note){
-    echo "sending an email"
+    echo "sending an email to all authorized people"
 }
