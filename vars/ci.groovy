@@ -4,11 +4,6 @@ def call(){
             label 'ansible'
         }
         stages{
-            stage('clean jenkins workspace'){
-                steps{
-                    cleanWs()
-                }
-            }
             stage('compile/built'){
                 steps{
                     script{
