@@ -12,5 +12,5 @@ def unittest(){
     }
 }
 def email(email_note){
-    println "sending failed status to autorized persons"
+    mail bcc: '', body: "failure job name- ${JOB_BASE_NAME} \n failed job url - ${JOB_URL} ", cc: '', from: 'nvrnagella90@gmail.com', replyTo: '', subject: 'job failured', to: 'nvrnagella@gmail.com'
 }
