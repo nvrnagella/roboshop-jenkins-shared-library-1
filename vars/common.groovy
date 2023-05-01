@@ -12,5 +12,5 @@ def unittest(){
     }
 }
 def email(email_note){
-    sh 'echo send'
+    println "sending failed status to autorized persons"
 }
