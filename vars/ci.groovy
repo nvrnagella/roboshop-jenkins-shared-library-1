@@ -16,7 +16,7 @@ def call(){
                 stage('unit test'){
                     steps{
                         script{
-                            ENV
+                            env
                             common.unittest()
                         }
                     }
