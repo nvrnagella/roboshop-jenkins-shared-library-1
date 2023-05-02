@@ -8,7 +8,7 @@ def compile(){
 }
 def unittest(){
     if (app_lang == "nodejs"){
-        sh 'npm test' || sh 'echo'
+        sh 'npm test' || true
     }
     if (app_lang == "maven"){
         sh 'mvn test'
