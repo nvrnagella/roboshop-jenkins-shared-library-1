@@ -23,7 +23,7 @@ def call(){
                 stage('code analysis'){
                     steps{
                         script{
-
+                            sh 'echo code analysis need to be done'
                         }
                     }
                 }
