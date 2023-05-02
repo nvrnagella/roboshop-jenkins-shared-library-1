@@ -16,14 +16,15 @@ def call(){
                 stage('unit test'){
                     steps{
                         script{
-                            sh 'env'
                             common.unittest()
                         }
                     }
                 }
                 stage('code analysis'){
                     steps{
-                        echo 'scanning code in sonar qube'
+                        script{
+
+                        }
                     }
                 }
                 stage('code to centralized place'){
