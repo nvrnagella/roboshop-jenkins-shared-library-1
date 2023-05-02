@@ -34,7 +34,7 @@ def call(){
             }
             post{
                 always{
-                    echo "sending an email"
+                    echo "this is post section"
                 }
             }
         }
