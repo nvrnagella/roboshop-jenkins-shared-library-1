@@ -27,6 +27,7 @@ def call(){
                                 SONAR_USER='$(aws ssm get-parameters --region us-east-1 --name sonar.user --with-decryption --query Parameters[0].Value)'
                                 SONAR_PASSWORD='$(aws ssm get-parameters --region us-east-1 --name sonar.pass --with-decryption --query Parameters[0].Value)'
                                 println "password=${SONAR_PASSWORD}"
+                                sh "sonar-scanner -Dsonar.host.url=http://:9000 -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASSWORD} -Dsonar.projectKey=${component}"
 
                             }
                         }
