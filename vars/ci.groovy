@@ -20,11 +20,14 @@ def call(){
                         }
                     }
                 }
-                stage('code analysis'){
+                stage('Quality control'){
                     steps{
-                        withCredentials([aws(credentialsId: 'venkat-aws-cred', acessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){
-                            sh 'SONAR_USER=$(aws ssm get-parameters --region us-east-1 --name sonar.user --with-decryption --query Parameters[0].Value)'
+                        script{
+                            withCredentials([aws(credentialsId: 'venkat-aws-cred', acessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){
+                                SONAR_USER='$(aws ssm get-parameters --region us-east-1 --name sonar.user --with-decryption --query Parameters[0].Value)'
+                            }
                         }
+
                     }
                 }
                 stage('code to centralized place'){
