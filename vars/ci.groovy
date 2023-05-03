@@ -1,9 +1,6 @@
 def call(){
     try{
         node{
-            stage('clean workspace'){
-                cleanWs()
-            }
             stage('compile/built'){
                 common.compile()
                 }
@@ -22,6 +19,9 @@ def call(){
             }
             stage('code to centralized place'){
                 echo 'code to centralized place'
+            }
+            stage('clean workspace'){
+                cleanWs()
             }
         }
     }catch(Exception e){
