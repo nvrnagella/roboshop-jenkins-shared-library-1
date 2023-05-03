@@ -4,9 +4,6 @@ def call(){
             agent{
                 label 'ansible'
             }
-            environment{
-                AWS_DEFAULT_REGION="us-east-1"
-            }
             stages{
                 stage('compile/built'){
                     steps{
@@ -25,8 +22,8 @@ def call(){
                 }
                 stage('code analysis'){
                     steps{
-                        script{
-                            sh "sonar-scanner -Dsonar.host.url=http://172.31.10.23:9000 -Dsonar.login=${USER} -Dsonar.password=${PASS} -Dsonar.projectKey=${component}"
+                        withCredentials([aws(credentialsId: 'venkat-aws-cred', acessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){
+                            SONAR_USER=$(aws ssm get-parameters --region us-east-1 --name sonar.user --with-decryption --query Parameters[0].Value)
                         }
                     }
                 }
