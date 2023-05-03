@@ -1,6 +1,6 @@
 def call(){
     try{
-        node('Build-In Node'){
+        node{
             environment{
                 THE_CREDENTIALS=credentials('venkat-aws-cred')
             }
