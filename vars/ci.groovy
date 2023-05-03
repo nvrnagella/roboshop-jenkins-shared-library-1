@@ -22,7 +22,9 @@ def call(){
                 }
                 stage('code analysis'){
                     environment{
-                        SONAR_USER=$(aws ssm get-parameters --region us-east-1 --name sonar.user --with-decryption --query Parameters[0].Value)
+                        sh '''
+                        SONAR_USER=$(aws ssm get-parameters --region us-east-1 --name sonar.user --with-decryption --query Parameters[0].Value)                            
+                        '''
                     }
                     steps{
                         withCredentials([aws(credentialsId: 'venkat-aws-cred', acessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){
