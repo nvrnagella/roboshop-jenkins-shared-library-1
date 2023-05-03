@@ -26,7 +26,9 @@ def call(){
                     }
                     steps{
                         withCredentials([aws(credentialsId: 'venkat-aws-cred', acessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){
-                            echo sh 'echo'
+                            sh '''
+                             echo $SONAR_USER
+                            '''
                         }
                     }
                 }
