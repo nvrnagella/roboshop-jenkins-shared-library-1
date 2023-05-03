@@ -4,6 +4,9 @@ def call(){
             agent{
                 label 'ansible'
             }
+            environment{
+                AWS_DEFAULT_REGION="us-east-1"
+            }
             stages{
                 stage('compile/built'){
                     steps{
@@ -21,10 +24,6 @@ def call(){
                     }
                 }
                 stage('code analysis'){
-                    environment{
-                        USER='$(aws ssm get-parameters --names sonar.user --with-decryption --query Parameters[0].Value | sed \'s/"//g\')'
-                        PASS='$(aws ssm get-parameters --names sonar.pass --with-decryption --query Parameters[0].Value | sed \'s/"//g\')'
-                    }
                     steps{
                         script{
                             sh "sonar-scanner -Dsonar.host.url=http://172.31.10.23:9000 -Dsonar.login=${USER} -Dsonar.password=${PASS} -Dsonar.projectKey=${component}"
