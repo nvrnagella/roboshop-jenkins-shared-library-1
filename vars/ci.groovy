@@ -8,9 +8,6 @@ def call(){
                 common.unittest()
             }
             stage('Quality control'){
-                environment{
-                    THE_CREDENTIALS=credentials('venkat-aws-cred')
-                }
                 SONAR_USER='$(aws ssm get-parameters --region us-east-1 --name sonar.user --with-decryption --query Parameters[0].Value | sed \'s/"//g\')'
                 SONAR_PASSWORD=sh (script: 'aws ssm get-parameters --region us-east-1 --name sonar.pass --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
                 wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${SONAR_PASSWORD}", var: 'SECRET']]]){
