@@ -1,6 +1,10 @@
 def call(){
     try{
         node{
+            stage('clean workspace'){
+                cleanWs()
+                git branch: 'main', url: 'https://github.com/nvrnagella/cart-1'
+            }
             stage('compile/built'){
                 common.compile()
                 }
@@ -19,9 +23,6 @@ def call(){
             }
             stage('code to centralized place'){
                 echo 'code to centralized place'
-            }
-            stage('clean workspace'){
-                cleanWs()
             }
         }
     }catch(Exception e){
