@@ -3,7 +3,7 @@ def call(){
 //        env.SONAR_EXTRA_OPTS = " "
 //    }
     try{
-        node(workstation){
+        node('workstation'){
             stage('clean workspace'){
                 cleanWs()
                 git branch: 'main', url: "https://github.com/nvrnagella/${component}-1"
