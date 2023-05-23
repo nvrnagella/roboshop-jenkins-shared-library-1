@@ -30,9 +30,12 @@ def call(){
                 println "pushing code to sonarqube for analysis"
 
             }
-            stage('code to centralized place'){
-                echo 'code to centralized place'
+            if(env.PUSH_CODE == "true"){
+                stage('code to centralized place'){
+                    echo 'code to centralized place'
+                }
             }
+
         }
     }catch(Exception e){
         common.email("failed")
