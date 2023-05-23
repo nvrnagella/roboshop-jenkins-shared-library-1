@@ -8,7 +8,7 @@ def call(){
         env.PUSH_CODE = "true"
     }
     try{
-        node('workstation'){
+        node{
             stage('clean workspace'){
                 cleanWs()
                 git branch: 'main', url: "https://github.com/nvrnagella/${component}-1"
