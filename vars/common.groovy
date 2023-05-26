@@ -22,6 +22,10 @@ def email(email_note){
     println "sending failed job status to authorized persons"
 }
 def artifactPush(){
+    sh "echo ${TAG_NAME} > VERSION"
+    if(app_lang == "nodejs"){
+        sh "zip -r ${component}-${TAG_NAME}.zip node_modules server.js VERSION ${extraFiles}"
+    }
     withCredentials([aws(credentialsId: 'venkat-aws-cred', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
         NEXUS_USER = sh (script: 'aws ssm get-parameters --region us-east-1 --name nexus.user --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
         NEXUS_PASSWORD = sh (script: 'aws ssm get-parameters --region us-east-1 --name nexus.pass --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
