@@ -32,7 +32,7 @@ def call(){
             }
             if(env.PUSH_CODE == "true"){
                 stage('code to centralized place'){
-                    echo 'code to centralized place'
+                    common.artifactPush()
                 }
             }
 
