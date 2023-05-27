@@ -30,7 +30,7 @@ def artifactPush(){
         NEXUS_USER = sh (script: 'aws ssm get-parameters --region us-east-1 --name nexus.user --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
         NEXUS_PASSWORD = sh (script: 'aws ssm get-parameters --region us-east-1 --name nexus.pass --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
         wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${NEUXS_PASSWORD}", var: 'SECRET']]]){
-            sh ""
+            sh "curl -v -u ${NEXUS_USER}:${NEXUS_PASSWORD} --upload-file ${component}-${TAG_NAME}.zip http://172.31.1.57:8081/repository/${component}/${component}-${TAG_NAME}.zip"
             }
     }
 }
