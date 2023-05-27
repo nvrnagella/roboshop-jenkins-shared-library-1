@@ -29,6 +29,10 @@ def pushArtifact(){
     if(app_lang == "nginx" || app_lang == "python"){
         sh "zip -r ${component}-${TAG_NAME}.zip VERSION ${extraFiles} * -x Jenkinsfile"
     }
+    if(app_lang == "maven"){
+        sh "mvn package && cp target/${component}-1.0.jar ${component}.jar"
+        sh "zip -r ${component}-${TAG_NAME}.zip VERSION ${component}.jar ${extraFiles} -x Jenkinsfile"
+    }
     withCredentials([aws(credentialsId: 'venkat-aws-cred', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
         NEXUS_USER = sh (script: 'aws ssm get-parameters --region us-east-1 --name nexus.user --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
         NEXUS_PASSWORD = sh (script: 'aws ssm get-parameters --region us-east-1 --name nexus.pass --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
