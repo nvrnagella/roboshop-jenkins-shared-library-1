@@ -19,6 +19,13 @@ def call() {
                     }
                 }
             }
+            stage('Terraform apply') {
+                steps {
+                    withCredentials([aws(credentialsId: 'awskey', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){
+                        sh "terraform apply -auto-approve -var-file=env-${INFRA_ENV}/main.tfvars"
+                    }
+                }
+            }
         }
     }
 }
