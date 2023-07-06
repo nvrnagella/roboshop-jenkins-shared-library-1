@@ -14,15 +14,13 @@ def call() {
         stages {
             stage('Terraform Init') {
                 steps {
-                    withCredentials([aws(credentialsId: 'awskey', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){
-                        sh "terraform init -backend-config=env-${INFRA_ENV}/state.tfvars"
+                    sh "terraform init -backend-config=env-${INFRA_ENV}/state.tfvars"
                     }
                 }
             }
             stage('Terraform apply') {
                 steps {
-                    withCredentials([aws(credentialsId: 'awskey', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){
-                        sh "terraform apply -auto-approve -var-file=env-${INFRA_ENV}/main.tfvars"
+                    sh "terraform apply -auto-approve -var-file=env-${INFRA_ENV}/main.tfvars"
                     }
                 }
             }
